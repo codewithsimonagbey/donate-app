@@ -1,4 +1,66 @@
-body {
-  padding: 10px;
-  font-family: sans-serif;
+@import "tailwindcss";
+
+/* Ensure Tailwind scans your React app */
+@source "./imports";
+
+/* ==== Default Theme: fundhope (scoped to data-theme) ==== */
+:root,
+[data-theme="fundhope"] {
+  --color-bg: oklch(0.98 0.005 250);
+  --color-fg: oklch(0.23 0.015 250);
+  --color-muted: oklch(0.80 0.010 250);
+  --color-card: oklch(0.99 0.004 250);
+  --color-card-border: oklch(0.92 0.010 250);
+
+  --color-accent: oklch(0.72 0.17 25);  /* brand primary */
+  --color-accent-2: oklch(0.68 0.20 300);
+  --color-success: oklch(0.75 0.16 145);
+  --color-danger:  oklch(0.68 0.21 25);
+
+  --radius-md: 1rem;
+  --radius-xl: 1.5rem;
+
+  --font-sans: Inter, ui-sans-serif, system-ui, Arial, sans-serif;
+}
+
+/* Dark overrides (when <html class="dark"> … ) */
+:root.dark,
+:root.dark[data-theme="fundhope"] {
+  --color-bg: oklch(0.15 0.010 250);
+  --color-fg: oklch(0.96 0.010 250);
+  --color-muted: oklch(0.55 0.020 250);
+  --color-card: oklch(0.20 0.010 250);
+  --color-card-border: oklch(0.28 0.015 250);
+}
+
+/* ==== Optional Second Theme: ocean ==== */
+[data-theme="ocean"] {
+  --color-bg: oklch(0.985 0.004 230);
+  --color-fg: oklch(0.22 0.020 230);
+  --color-muted: oklch(0.82 0.010 230);
+  --color-card: oklch(0.99 0.004 230);
+  --color-card-border: oklch(0.92 0.010 230);
+
+  --color-accent: oklch(0.68 0.16 240); /* blue-ish */
+  --color-accent-2: oklch(0.70 0.14 200);
+  --color-success: oklch(0.76 0.15 150);
+  --color-danger:  oklch(0.64 0.22 30);
+
+  --radius-md: 1rem;
+  --radius-xl: 1.5rem;
+  --font-sans: Inter, ui-sans-serif, system-ui, Arial, sans-serif;
+}
+:root.dark[data-theme="ocean"] {
+  --color-bg: oklch(0.16 0.010 230);
+  --color-fg: oklch(0.96 0.010 230);
+  --color-muted: oklch(0.56 0.018 230);
+  --color-card: oklch(0.22 0.010 230);
+  --color-card-border: oklch(0.30 0.015 230);
+}
+
+/* (Optional) small helpers */
+.theme-toggle {
+  @apply inline-flex items-center justify-center rounded-[--radius-md]
+         px-3 py-1.5 text-sm bg-[--color-card] text-[--color-fg]
+         hover:bg-[--color-muted]/40 transition;
 }

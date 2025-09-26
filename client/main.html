@@ -1,8 +1,43 @@
-<head>
-  <title>donate-app</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+  <head>
+    <meta charset="utf-8" />
+    <title>donate-app</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Let the browser know we support both color schemes -->
+    <meta name="color-scheme" content="light dark" />
+    <!-- Theme color per OS preference (used for browser UI) -->
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
 
-<body>
-  <div id="react-target"></div>
-</body>
+    <!-- No-Flash Theme Init: runs before paint -->
+    <script>
+      (function () {
+        const KEY = "theme"; // "light" | "dark"
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const saved = localStorage.getItem(KEY);
+        const dark = saved ? saved === "dark" : prefersDark;
+
+        // Apply class for Tailwind dark variants
+        document.documentElement.classList.toggle("dark", dark);
+
+        // Optional: set a default named theme (used by CSS tokens below)
+        document.documentElement.dataset.theme = document.documentElement.dataset.theme || "fundhope";
+
+        // Expose a tiny toggle helper (you can call window.toggleTheme() from Navbar)
+        window.toggleTheme = function (force) {
+          const isDark = force != null ? !!force : !document.documentElement.classList.contains("dark");
+          document.documentElement.classList.toggle("dark", isDark);
+          localStorage.setItem(KEY, isDark ? "dark" : "light");
+        };
+
+        // Optional: expose theme switcher (use named palettes defined in CSS)
+        window.setThemeName = function (name) {
+          document.documentElement.dataset.theme = name;
+        };
+      })();
+    </script>
+  </head>
+
+  <!-- Body classes reference your tokens so even non-React content looks correct -->
+  <body class="bg-[--color-bg] text-[--color-fg]">
+    <div id="react-app"></div>
+  </body>
